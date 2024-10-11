@@ -30,6 +30,7 @@ function App() {
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
+  // 배열 새로 만들어서 사용
   let gameBoard = [...initialGameBoard.map(array => [...array])];
 
   for (const turn of gameTurns) {
