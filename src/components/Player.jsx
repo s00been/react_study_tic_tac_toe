@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({ initialName, symbol, isActive, onChangeName, btn }) {
     const [ playerName, setPlayerName ] = useState(initialName)
     const [ isEditing, setIsEditing ] = useState(false);
 
@@ -9,6 +9,11 @@ export default function Player({ initialName, symbol, isActive }) {
         // 이 상태 업데이트 함수로 새로운 함수를 보내야 함.
         // => 여기서 전달하는 이 함수를 리액트가 호출하여 자동적으로 현재 상태값을 가지게 되기 때문이다. = 즉 상태 변경 전의 값이 입력
         setIsEditing((editing) => !editing); // 가장 최신값 사용
+
+        if (isEditing) {
+            onChangeName(symbol, playerName);
+        }
+
     }
 
     function handleChange(val) {
@@ -28,7 +33,10 @@ export default function Player({ initialName, symbol, isActive }) {
                 }
                 <span className="player-symbol">{symbol}</span>
             </span>
-            <button onClick={handleEditClick}>{ isEditing ? 'SAVE' : 'EDIT' }</button>
+            {
+                btn === 0 &&
+                <button onClick={handleEditClick}>{ isEditing ? 'SAVE' : 'EDIT' }</button>
+            }
         </li>
     )
 }
